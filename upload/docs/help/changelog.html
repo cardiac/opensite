@@ -1,0 +1,274 @@
+<strong><img src="src/images/icons/help_about.gif"> Help Files - Change Log</strong><br />
+<span class="type2"><strong>beta v0.2 "Domino" branch</strong></span><br />
+v0.2.2 / 08-25-2005<br />
+  - Fixed issue where the /src/tmp/user.php file would be displayed on every page<br />
+  - Fixed a security issue where non-administrators could view the update page<br />
+  - Fixed a bug where you were unable to edit the day based news layout properly<br />
+  - Fixed an issue where new users were not given the specified skin<br />
+  - Added a feature that alphabetizes all lists of news categories<br />
+  - Fixed an issue where you could not add new categories when using the MySQLi driver<br />
+  - Improved the user group system to something similar to the news category system<br />
+<p>
+v0.2.1 / 08-09-2005<br />
+  - Fixed an issue where you could not view user profiles when using day based news<br />
+  - The install script now returns the proper $site_contentfolder variable<br />
+  - Added the advertisement manager link back to the gui<br />
+  - Fixed an issue where stylesheets were not being loaded because of certain .htaccess priveleges<br />
+</p><p>
+v0.2.0 / 08-01-2005<br />
+  - Fixed XHTML 1.1 validation issues<br />
+  - Added information about contentone at the top of each layout's source<br />
+  - Fixed error messaging in MySQL and MySQLi drivers<br />
+  - Major security fix in how input is accepted into the database<br />
+  - Authentication system improved<br />
+  - Login messages modified to display just text<br />
+  - If the install script still exists, its displayed as a warning rather than an error<br />
+  - Complete layout system restructuring<br />
+  - If the layout selected does not exist, include.php reverts to the default<br />
+  - Fixed random slash issue<br />
+  - Disabled users may no longer comment on news posts<br />
+  - Most error messages that require you to return to a page now utilize a javascript<br />
+  - Added the ability to display category specific news<br />
+  - Added the ability to edit or delete comments from the public comment page<br />
+  - Many minor tweaks made and quite a few nuisances removed or changed<br />
+  - Added the user profile viewer<br />
+  - The default and 404 pages are now layout specific<br />
+  - Fixed category display on news modification page<br />
+  - Linkbar links on top menu are now individual str_replaces for more powerful skins<br />
+  - Fixed problem where you couldn't disable users from the modify page<br />
+  - Fixed issue where if you modified another user it displayed your skin rather than their's<br />
+  - Redesigned the main user page to be more aesthetically pleasing<br />
+  - Removed old content center default and 404 page links<br />
+  - Added the ability to display user titles and news categories in news posts<br />
+  - The installer script has been modified to hopefully fix any outstanding issues<br />
+  - Modified the default skin<br />
+  - ContentOne has officially changed its name to openSite<br />
+</p><p>
+<span class="type2"><strong>beta v0.1 "Atlantis" branch</strong></span><br />
+v0.1.5 / 04-23-2005<br />
+  - Fixed advertisement bug when ads were deleted<br />
+  - Added message when there are no moderators or standard users<br />
+  - Fixed news layout issue when no posts existed in the database<br />
+  - Added feature that cancels update if server is not available<br />
+  - Added skin automatic detection feature<br />
+  - Improved layout and stylesheet editors<br />
+  - Fixed comment issue where logged in users didn't have their user details posted<br />
+  - Fixed an issue where moderators couldn't modify other people's comments<br />
+  - Fixed a security issue when using the update script<br />
+  - Fixed issue where moderators could not delete standard users<br />
+  - User registration script completed<br />
+</p><p>
+v0.1.4 / 03-31-2005<br />
+  - Fixed default skin image links<br />
+  - Fixed the user management page for moderators<br />
+  - Fixed an issue involving sub categories when new pages were created<br />
+  - Improved database function code<br />
+  - Added automatic install script<br />
+  - Added feature that detects if install script still exists<br />
+</p><p>
+v0.1.3 / 02-26-2005<br />
+  - Added basic user module functionality<br />
+  - Added .htaccess file to settings folder for security<br />
+  - Additional changes made to the user management page<br />
+  - New default skin made based on v9<br />
+  - Minor fixes to gui for aesthetic effect<br />
+  - First version of user registration finished<br />
+  - Public content files restructured<br />
+  - Comment system automatically detects logged in users now<br />
+  - Error message system given a new style<br />
+  - Admin account may only be modified by itself<br />
+  - All data files moved to the new data directory<br />
+</p><p>
+v0.1.2 / 02-08-2005<br />
+  - Changed the beta version numbering system to follow many other open source projects<br />
+  - Module system has been overhauled to be more automatic<br />
+  - The startup module may now be viewed by standard users if allowed<br />
+  - Fixed the help view bug<br />
+  - Fixed certain tmp files not being deleted correctly<br />
+  - Fixed startup module bug where the module did not appear or save correctly<br />
+  - Fixed content formatting ampersand error<br />
+  - Fixed content page error checking<br />
+  - Fixed moderator access to content center<br />
+  - Added capability to view latest version of ContentOne<br />
+  - Update checking system added<br />
+  - User system redesigned for flexibility<br />
+</p><p>
+v0.1.1 / 01-14-2005<br />
+  - Fixed directory structure failure upon layout change<br />
+  - Fixed news deletion bug<br />
+  - Fixed moderator news deletion exploit<br />
+  - Added content page deletion feature<br />
+  - Engine completely restructured for less bandwidth usage<br />
+  - Fixed directory structure failure bug<br />
+  - Added an option to modify the site's default page<br />
+  - Added an option to modify the site's 404 page<br />
+  - Advertisments may now be added/modified/deleted from within the gui<br />
+  - Settings page redesigned<br />
+</p><p>
+v0.1.0 / 01-07-2005<br />
+  - Corrected layout building error<br />
+  - Added stylsheet build system<br />
+  - Fixed header when posting comments while not logged in<br />
+  - Advertisements now display properly<br />
+  - Fixed &amp;amp; bug in variable layouts<br />
+  - Enabled content pages finally<br />
+  - Added the ability to add and modify content pages<br />
+  - Fixed php code bug in layouts by adding layout tmp files<br />
+  - Updated copyright information with 2005 date<br />
+</p><p>
+<font class="type2"><strong>alpha versions</strong></font><br />
+v0.0.14 / 12-07-2004<br />
+  - Improved error handling<br />
+  - Database driver support added<br />
+  - MySQLi support added<br />
+  - Corrected guest avatar issue<br />
+  - Made current database driver appear first in list<br />
+  - Fixed login message error<br />
+  - Fixed many different moderator security checks<br />
+  - Massive reorganization of files and build<br />
+  - Include system at first stable build<br />
+  - Corrected comments system bug<br />
+  - Fixed moderator rights exploit<br />
+  - Fixed standard user password change exploit<br />
+  - Limited the amount of news displayed<br />
+  - Finished getting day based news working<br />
+</p><p>
+v0.0.13 / 11-06-2004<br />
+  - Basic groundwork for content center completed<br />
+  - Added basic site statistics<br />
+  - Changes made in how skins are processed<br />
+  - Site layout actually works as intended<br />
+  - Site layout now stored in content manager<br />
+  - Multiple site layouts now supported<br />
+  - Layouts may now be created<br />
+  - Layouts may now be deleted<br />
+  - Moderator rights bug fixed<br />
+  - News categories may now be added/deleted<br />
+  - You are required to select valid categories for news now<br />
+  - News categories may be used on main page now<br />
+  - Posting comments updates user's comments status<br />
+  - Posting news now updates a user's posts count<br />
+</p><p>
+v0.0.12 / 10-09-2004<br />
+  - More functions added to functions.php<br />
+  - User modified successfully message added<br />
+  - Comment icon added for news posts<br />
+  - Comment viewing enabled in manager<br />
+  - Moderator 2 exploit found and fixed<br />
+  - Comments may be modified<br />
+  - Comments may be deleted<br />
+  - Guest avatar added<br />
+  - Posting system created for comments<br />
+  - Comment layout features added<br />
+  - News commenting system base completed<br />
+</p><p>
+v0.0.11 / 09-28-2004<br />
+  - Corrected form security flaw<br />
+  - Rewrote some code for efficiency<br />
+  - News system may now be displayed on main page<br />
+  - News layout may be modified<br />
+  - News system listing slightly modified<br />
+  - Inclusion system begun for the main site<br />
+  - Login skinning method changed for ease of modification<br />
+  - Corrected secure issue if a user loses access while logged in<br />
+  - News posts may now use substitute html tagging system<br />
+  - Enabled html in news posts<br />
+  - Corrected news posting formatting<br />
+  - Added functions.php file to handle common tasks<br />
+  - Line breaks now work in news<br />
+  - Added site_contentfolder variable to the settings page<br />
+  - Maximum avatar width and height now has an effect<br />
+</p><p>
+v0.0.10 / 09-19-2004<br />
+  - Users may now be disabled/enabled from the main user management page<br />
+  - Users are now sorted by rights descending and username ascending<br />
+  - Dates within news posts now work properly<br />
+  - Fixed Internet Explorer icons bug<br />
+  - News system completely redesigned to be like user management<br />
+  - Development page added to the help files<br />
+  - Moderators are now available as a user level<br />
+  - User and news icons changed<br />
+  - News post management system complete<br />
+  - Corrected some grammar<br />
+  - Fixed a bug when you modifed a user<br />
+</p><p>
+v0.0.9 / 09-17-2004<br />
+  - Skin system added and is functional<br />
+  - Corrected skin default bug on login screen<br />
+  - Disabled accounts that are still logged in are disabled<br />
+  - Tag system implemented in skins<br />
+  - Pages are optimized with single quotes when variables weren't needed<br />
+  - View news feature works now<br />
+  - Delete news feature works now<br />
+  - Done away with the print command when creating MySQL lists<br />
+  - Known issues/bugs list added to change log<br />
+  - Forms modified slightly for cosmetic effect<br />
+  - Avatar settings added<br />
+  - User system completely redesigned for ease of use<br />
+  - Login screen and stylesheets modified<br />
+  - Images added for further clarification<br />
+  - Bugs from help.php and install.php fixed<br />
+</p><p>
+v0.0.8 / 09-06-2004<br />
+  - Exploit found in help.php and fixed<br />
+  - Rights cookie exploit found and fixed<br />
+  - Module deletion now works<br />
+  - Style changes made to setup for skins<br />
+  - Module startup option added to settings page<br />
+  - Fixed login twice modify settings bug<br />
+  - Made module startup actually work<br />
+  - Fixed boolean false bug for module startup option<br />
+  - Modified the settings page for cosmetic effect<br />
+  - Module system should work entirely now<br />
+  - Engine style changes made<br />
+</p><p>
+v0.0.7 / 08-29-2004<br />
+  - Changed some grammar and other cosmetical stuff<br />
+  - User system modified with new fields<br />
+  - Trailing slash no longer required in url settings<br />
+  - Login screen modified slightly to look better in Firefox<br />
+  - About version information added to the help files<br />
+  - Fixed authorization required bug<br />
+  - MySQL data storage changed for some fields<br />
+  - MySQL connection is now closed after each query<br />
+  - Date format added to settings<br />
+  - Code created so that outside modules may be installed<br />
+  - Automatic install module feature added<br />
+</p><p>
+v0.0.6 / 06-28-2004<br />
+  - Fixed bug where active status wasn't working for new users<br />
+  - You may no longer delete your own account if you are an administrator<br />
+  - It is now possible to edit the settings from within content manager<br />
+  - Help section added<br />
+  - The Help section may be fully accessed from the help.php file<br />
+  - Change log added to help files<br />
+</p><p>
+v0.0.5 / 06-01-2004<br />
+  - Password change bug fixed<br />
+  - Secure page can now be used anywhere<br />
+  - Fixed src/index.php bug<br />
+  - Personal user modification system finished<br />
+  - Overall user system complete<br />
+  - Username, e-mail, and title fields decreased in size<br />
+  - List users option added<br />
+</p><p>
+v0.0.4 / 05-31-2004<br />
+  - Administrative user system modification system finished<br />
+  - Accounts' active status now matters<br />
+  - Accounts' rights now matter<br />
+  - Passwords now encrypted<br />
+  - MySQL install now automatically creates admin account<br />
+  - Work begun personal user modification system<br />
+</p><p>
+v0.0.3 / 05-30-2004<br />
+  - User system most stable<br />
+  - Most groundwork complete<br />
+  - Work begun on administrative user modification system<br />
+</p><p>
+v0.0.2 / 05-29-2004<br />
+  - Users may now login<br />
+  - Work begun on the main engine<br />
+</p><p>
+v0.0.1 / 05-28-2004<br />
+  - Initial startup, nothing works<br />
+</p>

@@ -1,0 +1,23 @@
+<b><img src="src/images/icons/help.gif"> Help Files - Error List</b><br>
+<?php if ( $action != 'help' or ( $_COOKIE['rights'] == 2 or $_COOKIE['rights'] == 3 ) ) { ?>
+<font class="type2"><b>Error List - Serverside</b></font><br>
+<b>Error 001 - MySQL Database Access Failure</b><br>
+This error means that Content Manager was unable to access your MySQL database which stores all of the important information necessary to run the user system. Other features also may require your database, but if your user system does not work, all of the other options won't either. In order to six this error, you need to correct your database access settings. These are found in the src/settings.php file. The variables $db_host, $db_user, and $db_pass needs to be up to date with whatever your databse uses. You also need to make sure that you have run the install file contained within the package. It should have automatically made sure that your MySQL database could have been successfully connected to and created several tables that start with "content_". It is NOT possible to rename the tables and have the script continue to function.<p>
+<b>Error 002 - MySQL Database Selection Failure</b><br>
+The Content Manager was successful in connecting to your MySQL server with the supplied credentials. However, it was unable to locate the database defined by the $db_database variable defined in your src/settings.php file. Open the settings file and correct it to the database in which ContentOne's database settings are stored in.<p>
+<b>Error 003 - MySQL Query Execution Failure</b><br>
+For some reason the MySQL query was unable to be executed on the content tables. This is more than likely because the user used to access the MySQL server does not have full rights to the tables. You can correct this by opening the src/settings.php file and changing the variables $db_user and $db_pass to a user who does have full rights to the MySQL tables.<p>
+<b>Error 004 - Settings Write Failure</b><br>
+The src/settings.php file was unable to be written to because it has not been chmodded to 777 (Read, Write, and Execute access availablel to all users). You can correct this by opening an FTP connection to the server and modifying the rights (chmod) settings for the file. If all else fails, you can manually edit the settings file, although this is not recommended.<p>
+<b>Error 005 - Settings Open Failure</b><br>
+The src/settings.php file does not exist or your server does not allow scripts to use the fopen() command. If the settings file does not exist, then you can copy a fresh version from the install package and manually set the variables. If the file does exist, contact your server administrator and ask about allowing PHP scripts to write to files.<p>
+<b>Error 006 - Directory Structure Failure</b><br>
+The src/tmp directory does not exist in your directory structure. Create the directory to fix the error. This may also be displayed if for some reason a session file still exists in the tmp directory. Delete the file from the directory and report all of the steps used to create the file. We are working as fast as possible to prevent this error from occuring. Please be patient.<p>
+<?php } ?>
+<font class="type2"><b>Error List - Login Messages</b></font><br>
+<b>Wrong Login Credentials</b><br>
+The wrong username and/or password was supplied at the login screen. Retype the information and try again.<p>
+<b>Authorization Required</b><br>
+You do not have the necessary authorization to view the page. Go to the login screen and login.<p>
+<b>Account Disabled</b><br>
+Your account has been disabled, but still exists. Contact your site administrator in order to find out why your account is not enabled.<p>

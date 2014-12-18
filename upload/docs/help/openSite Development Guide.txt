@@ -1,0 +1,192 @@
+openSite Development Guide v1.0.1
+written by Ryan "veran" Strug
+---------------------------------------------
+  1) Introduction
+  2) Modules - The Basics
+  3) Advanced Techniques
+  4) Conclusion
+
+1) Introduction
+---------------------------------------------
+One of the exciting features with openSite is the ability for people to modify their openSite installations with features that they feel are missing. Modules are that feature and they offer tons of abilities and flexibility for coders while mantaining the security and power of openSite. We are making an attempt to provide as much information as we can about how developers can take full advantage of the software and make things work the way they want them to. In this document you will find many key details about how openSite works in order for you tweakers to change details of the actual manager or use the module system to display your necessary content.
+
+NOTE: Root, /, will refer to the root openSite directory, not the site root directory.
+NOTE 2: We will refer to your module as "MOD" in this document.
+NOTE 3: Lines/Paragraphs beginning with "# HELP >" are for php beginners
+
+2) Modules - The Basics
+---------------------------------------------
+As of openSite v0.1.2, the module system was rebuilt to have a more automatic installation with less user interaction. While the older system still had many of the key elements of using a module, it was too constrictive and required too much user interaction. I could even say that it may have scared away from potential module users. Nevertheless, any module made with the proper v0.1.2 specifications will still be compatabile with the system of v0.1.1 and below. This manual will only describe the steps necessary to get a v0.1.2 module running, but you may visit the forums for more information on the previous system if necessary.
+
+The key thing to know about modules is how they work and where they are. Modules are stored in the /src/modules/ folder in their own individual forums. All of the files with the module should be kept in that folder in order to make it much simpler for users. For example, if we created a module called "KewlMod", then all of the files should be kept neatly in the /src/modules/kewlmod/ folder.
+
+Modules are activated and called within openSite through the use of the get HTTP vars. The exact link would be the following: "index.php?action=modules&module=MOD".
+
+NOTE: Every link going to your module MUST contain this beginning part or none of your module will work.
+
+In short, this tells openSite to include your /src/modules/MOD/index.php file. This is where the module system has it's only major limitation. In order to be as flexible as possible, while mantaining the most security, ONLY will that index.php file be included into the manager. In order to get something working, however, you will need to use what I like to call the engine system. Basically, through the use of if statements and includes, you can get your index.php file to serve as the hub of the module and make it able to access all of the features you include in your module. Here's a script that could be that index.php that demonstrats how to apply this concept:
+
+<?php
+	$media = $_GET['media']; // acquires the media variable from the url bar
+
+	if ( $media == 'pause' ) {
+		include('src/modules/MOD/pause.php'); // includes the pause.php file when the media variable is set to pause
+	} elseif ( $media == 'stop' ) {
+		include('src/modules/MOD/stop.php');
+	} else {
+		include('src/modules/MOD/play.php'); // if no media variable is set, then the play.php file is included
+	}
+?>
+
+If you want a real example, simply open the /src/engine.php file contained in your openSite installation.
+
+Here's some information on urls and http vars:
+
+	index.php?action=modules&module=MOD&media=pause // includes the pause.php file if using the above script as your index.php
+	index.php?action=modules&module=MOD // includes the play.php file because no information is set to the media variable
+
+# HELP > You may have noticed the $_GET['media'] variable at the top of the previous script. The variable is something called a superglobal. Superglobals are variables that must be acquired from some other location other than within the script. This style of superglobal is actually new, as of PHP v4.1.0. The older style looked something like this: $HTTP_GET_VARS['media']. While you may want to do this as it is apart of your older habits, it really should be changed to the newer style. openSite requires at least PHP v4.1.0 so you gain nothing for being backwards compatible. Here's a quick list of what some of the more common ones are and how they are used:
+
+	$_GET['variable'] // used to get the variable from the address bar at the top of the browser
+	$_POST['variable'] // gets the variable from a form from a previous page
+	$_SESSION['variable'] // used in conjunction with browser sessions to store variables (you must begin a session using your script)
+	$_COOKIE['variable'] // acquires information from a stored file on the user's computer (you must set the cookie using your script)
+
+With all of this information, you should be able to get a basic script running. But there are still a few details remaining for you to learn before you can go off on your own.
+
+All modules are required to have a special file in their directory called mod_file.php (as of v0.1.2). This file is used to store specific information about your module that openSite reads in order to automatically install your module. Here is what the file should contain:
+
+<?php
+	$mod_title = 'MOD';
+	$mod_auth = '3';
+?>
+
+This basically sets the two variables $mod_title and $mod_auth. $mod_title is the official name of your module which is displayed to the user when they see your module on a list. $mod_auth is a variable that sets the tye of user that you want to allow access to your module. Only three numbers are used for this variable: 3 for Administrators Only, 2 for Administrators and Moderators, and 1 for All Users. Generally, the default rights should be 3 in order to give administrators the chance to examine your module before actually allowing other users to view it. It is highly recommended that you follow this rule and do not manually set the authentication to another value. Administrators have the option to change the authentication level from within openSite no matter what you set it to, however.
+
+While there is a module authentication level, if you allow lower level users to access your module, but have Administrator only features, for example, then you must take other precautions in order to prevent unauthorized access. The following code will restrict users from accessing certain sections in your script. You can place it on seperate files or within other if statements.
+
+<?php
+	if ( $_COOKIE['rights'] == 3 ) {
+		error('Administrators Only, Access Denied.');
+	}
+?>
+
+All of this information should be enough for you to start a basic module. The next section will detail some of the advanced functions of openSite and how things work within the software. Advanced PHP/MySQL users should have no problem figuring this out on their own, but it's here for those that need a little guidance.
+
+3) Advanced Techniques
+---------------------------------------------
+This section contains information about the inner workings of openSite. Some of the information contained here may be unsuitable for beginning PHP/MySQL users. It is recommended that you at least understand how to write a useful PHP script that takes input in and modifies it, either through flat file or MySQL before reading through this section. People who actually know something just need to know that this does scare away very beginning users from posting common questions on the forums, so please bear with us.
+
+  - DATA HANDLING >
+User information is stored in openSite through the use of cookies. Here's the complete list of all the variables created for each user with a little description for each:
+
+     cookie                  title                                                        description
+  $_COOKIE['id']           user's id       Each user has their own unique id. This variable is used for various actions among openSite to keep it simple
+  $_COOKIE['username']    user's name      The user's personal alias/name/title/handle
+  $_COOKIE['password']  user's password    The password variable that each user uses to login. Kept for continuous security authentication
+  $_COOKIE['email']      user's e-mail     The user's personal e-mail address
+  $_COOKIE['im']       user's screen name  An optional setting in which the user specifies their screen name for an instant messaging program (experimental)
+  $_COOKIE['title']      user's title      A little description that goes along with each user (experimental)
+  $_COOKIE['avatar']  url to user's avatar The address to the user's personal icon/avatar/image
+  $_COOKIE['sex']        user's gender     The user's gender
+  $_COOKIE['site']         site name       The name of the user's personal website
+  $_COOKIE['siteurl']      site url        The address to the user's personal website
+  $_COOKIE['posts']    user's post count   The user's news post count only
+  $_COOKIE['comments']  user's comments    The number of the user's comments
+  $_COOKIE['team']       user's group      Each user is apart of a specific user group, this is the associated variable
+  $_COOKIE['rights']     user's rights     The user's authentication level; 1 - Basic User, 2 - Moderator, 3 - Administrator
+  $_COOKIE['active']     user's status     The current status of the user; 1 - Enabled, 0 - Disabled
+
+The variables $_COOKIE['id'], $_COOKIE['username'], $_COOKIE['password'], $_COOKIE['rights'], and $_COOKIE['active'] are all used in each user's authentication to openSite and are checked on every single page for security reasons. If all these variables weren't checked then several security holes could be compromised. Cookies are not very secure as a user can simply change their contents, so they are constantly checked against the real database to prevent someone from sneaking into places where they don't belong.
+
+  - openSite FILE STRUCTURE >
+Many files are loaded when someone views a page in openSite. Here is a simple diagram that details exactly when and where each file is loaded (two spaces are placed in front of each page in order to represent being included in the root file):
+
+   < openSite page >
+
+   /index.php
+     /src/variables.php
+       /src/settings/settings.php
+     /src/engine.php
+       /src/secure.php
+         /src/variables.php (in case secure.php is included elsewhere)
+           /src/settings/settings.php
+         /src/functions.php
+         /src/drivers/$db_driver.php
+       /src/layout/header.php
+         /src/layout/skins/$skin/header.php
+       /src/src/$rights/$rights_$action_$type.php
+       /src/layout/footer.php
+         /src/layout/skins/$skin/footer.php
+
+   < openSite login page >
+
+   /index.php
+     /src/variables.php
+       /src/settings/settings.php
+     /src/authenticate.php
+       /src/variables.php
+         /src/settings/settings.php
+       /src/functions.php
+       /src/drivers/$db_driver.php
+       /src/login.php
+         /src/layout/skins/$skin/login.php
+
+   < openSite public access page >
+
+   /index.php
+     /src/variables.php
+       /src/settings/settings.php
+     /src/content.php
+       /src/variables.php
+         /src/settings/settings.php
+       /src/functions.php
+       /src/drivers/$db_driver.php
+       /src/layout/header.php
+         /src/layout/skins/$skin/header.php
+       /src/layout/footer.php
+         /src/layout/skins/$skin/footer.php
+
+   < openSite layout build page >
+
+   /src/include.php
+     /src/variables.php
+       /src/settings/settings.php
+     /src/functions.php
+     /src/drivers/$db_driver.php
+     /src/tmp/$session.php
+       /src/layout/site/$layout.php
+       /src/include/$page.php
+       /src/tmp/user.php
+       /src/include/$news.php
+       /src/include/ads.php
+
+You may notice quite a few variables in the list, so here's a quick list of what those variables are and what they mean (some are not real variables [NR]):
+
+    variable        description
+   $action          The main section/action that is being used. Either "settings", "content", "news", "user", "modules", "help", or "logout"
+   $db_driver       The database driver, either "MySQL" or "MySQLi"
+   $layout          The title of the layout being used
+   $page            NR - If a .php file is loaded, either "default" or "404" replaces this. The data is taken from the database, otherwise
+   $rights          NR - The authentication level of the user, either "admin" or "basic"
+   $session         NR - The session id number of the user
+   $skin            The openSite skin that the user sets
+   $type            NR - The subaction of the main action
+
+  - DATABASE TABLES >
+Here's the complete list of database tables that openSite uses:
+
+     table                description
+   content_ads            Stores advertisement information
+   content_categories     Keeps all of the various categories needed here, will be expanded sometime in the future
+   content_comments       All comments and their associated elements are kept here
+   content_main           Stores the main content pages of the site
+   content_news           All news posts are stored in this table with all of their associated elements
+   content_users          Every user who exists is kept in this table
+
+4) Conclusion
+---------------------------------------------
+This is a very early version of this document and only contains whatever is current in v0.1.2 of openSite. Some portions have been left out temporarily and will be added at a later date, so please stay tuned. Expect a skinning guide next. Please use whatever information you can from this guide to make openSite work better for you. Hopefully you learned something. ;)
+
+written by Ryan "veran" Strug
+Copyright 2005 Primal Fusion
